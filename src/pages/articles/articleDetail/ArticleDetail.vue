@@ -19,7 +19,9 @@
                 <el-col :span="6" :offset="2">
                     <span class="article-footer-msg article-footer-span">标签</span>
                     <el-divider direction="vertical"></el-divider>
-                    <el-tag class="article-footer-tag" v-for="(o, index) in article.tag" :key="index">index</el-tag>
+                    <el-tag class="article-footer-tag" v-for="(o, index) in article.tag" :key="index">
+                        {{o.name}}
+                    </el-tag>
                 </el-col>
                 <el-col :span="6" :offset="2">
                     <span class="article-footer-msg article-footer-time">时间</span>
@@ -77,13 +79,15 @@
                         " }\n" +
                         "</pre>",
                     tag:[
-                        {},
-                        {},
-                        {},
-                        {},
-                        {},
-                        {},
-                        {},
+                        {
+                            name: 'java'
+                        },
+                        {
+                            name: 'hashMap'
+                        },
+                        {
+                            name: '源码'
+                        },
                     ],
                     createTime: "2020-08-09"
                 }
