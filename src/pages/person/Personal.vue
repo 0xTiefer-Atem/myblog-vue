@@ -1,7 +1,7 @@
 <template>
     <el-card class="personal-card" shadow="never">
         <el-row :gutter="24">
-            <el-col :span="6" :offset="4" v-for="(info, index) in personalInfoList" :key="index">
+            <el-col :span="8" :offset="2" v-for="(info, index) in personalInfoList" :key="index">
                 <el-card  :body-style="{ padding: '0px' }"
                           class="article-card"
                           shadow="hover">
