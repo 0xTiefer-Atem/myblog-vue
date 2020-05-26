@@ -17,7 +17,7 @@
                     </el-menu>
                 </el-col>
                 <el-col :span="5">
-                    <el-input :value="searchWord" class="home-button" placeholder="搜索文章"></el-input>
+                    <el-input :value="searchWord" class="home-button" placeholder="搜索文章内容"></el-input>
                 </el-col>
                 <el-col :span="1">
                     <el-button class="home-button" icon="el-icon-search" circle></el-button>
