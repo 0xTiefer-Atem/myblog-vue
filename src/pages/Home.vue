@@ -149,7 +149,4 @@
     .my-motto {
         font-style: italic;
     }
-
-
-
 </style>
