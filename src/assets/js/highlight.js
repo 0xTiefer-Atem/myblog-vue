@@ -8,19 +8,20 @@ let Highlight = {};
 Highlight.install = function (Vue, options) {
     // 先有数据再绑定，调用highlightA
     Vue.directive('hljs', {
-        inserted: function(el) {
+        inserted: function (el) {
             let blocks = el.querySelectorAll('pre');
+            // Array.prototype.forEach.call(blocks, Hljs.highlightBlock);
             for (let i = 0; i < blocks.length; i++) {
                 const item = blocks[i];
                 Hljs.highlightBlock(item);
-            };
+            }
         }
     });
 
     // 先绑定，后面会有数据更新，调用highlightB
     Vue.directive('highlightB', {
         componentUpdated: function(el) {
-            let blocks = el.querySelectorAll('pre code');
+            let blocks = el.querySelectorAll('pre');
             for (let i = 0; i < blocks.length; i++) {
                 const item = blocks[i];
                 Hljs.highlightBlock(item);
