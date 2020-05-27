@@ -57,7 +57,7 @@
               //当前页数
               pageIndex: 1,
               //总页数
-              total: 100,
+              total: 0,
 
               //每页大小
               pageSize: 6,
@@ -75,6 +75,10 @@
               console.log(resData);
               if(resData.status === 2000) {
                   this.blogList = resData.result.data;
+                  this.total = this.blogList.length
+                  this.$message.success("文章查询成功")
+              }else {
+                  this.$message.success("文章查询失败")
               }
           })
       },
@@ -100,6 +104,10 @@
                   console.log(resData);
                   if(resData.status === 2000) {
                       this.blogList = resData.result.data;
+                      this.total = this.blogList.length
+                      this.$message.success("文章查询成功")
+                  }else {
+                      this.$message.success("文章查询失败")
                   }
               })
           },
