@@ -1,17 +1,17 @@
 <template>
-
     <el-card
             :body-style="{ padding: '0px' }"
             class="article-detail-card"
             shadow="never">
         <div slot="header" class="article-title">
             <el-page-header @back="goBack">
-            </el-page-header>{{article.title}}
+            </el-page-header>{{blogDetail.blogTitle}}
         </div>
 
 
         <div class="ql-snow">
-            <div class="ql-editor" v-html="article.content" v-hljs></div>
+            <div  class="ql-editor" v-hljs v-highlight-b v-html="blogDetail.blogContent">
+            </div>
         </div>
         <el-divider></el-divider>
         <div class="article-footer">
@@ -19,14 +19,14 @@
                 <el-col :span="6" :offset="2">
                     <span class="article-footer-msg article-footer-span">标签</span>
                     <el-divider direction="vertical"></el-divider>
-                    <el-tag class="article-footer-tag" v-for="(o, index) in article.tag" :key="index">
+                    <el-tag class="article-footer-tag" v-for="(o, index) in blogDetail.blogTagListJson" :key="index">
                         {{o.name}}
                     </el-tag>
                 </el-col>
                 <el-col :span="6" :offset="2">
                     <span class="article-footer-msg article-footer-time">时间</span>
                     <el-divider direction="vertical"></el-divider>
-                    <el-tag>{{article.createTime}}</el-tag>
+                    <el-tag>{{blogDetail.createTime}}</el-tag>
                 </el-col>
             </el-row>
         </div>
@@ -42,16 +42,7 @@
         name: "ArticleDetail",
         data() {
             return {
-                article: {
-                    blogContent: "<p><sonnospaceple",
-                    blogId: "001",
-                    blogTagList: "[{name: 'java'},{name: 'hashMap'},{name: '源码'}]",
-                    blogTagListJson: null,
-                    blogTitle: "几个Hash容器的区别",
-                    blogType: "技术",
-                    createTime: "2020-05-18T15:15:01.000+0000",
-                    id: 1
-                }
+                blogDetail: {}
             }
         },
         activated() {
@@ -64,10 +55,13 @@
                 let id = this.$route.query.id;
                 console.log(id);
                 request({
-                    url: '/blog/selectOne?id='+id
-                }).then( res => {
+                    url: '/blog/selectOne?id=' + id
+                }).then(res => {
                     let resData = res.data;
                     console.log(resData);
+                    if(resData.status === 2000) {
+                        this.blogDetail = resData.result.data;
+                    }
                 })
             },
 
@@ -76,6 +70,8 @@
             goBack() {
                 this.$router.back();
             }
+        },
+        computed: {
         }
     }
 
