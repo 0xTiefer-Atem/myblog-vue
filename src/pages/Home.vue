@@ -30,27 +30,27 @@
                 <el-card style="margin-left: 5px;border-radius: 30px;" shadow="never">
                     <el-row>
                         <el-col>
-                            <el-avatar shape="square" :size="150" src="https://avatars2.githubusercontent.com/u/41837316?s=460&u=a0defd7228d4f3553f6047340f6d68fdea8105d4&v=4"></el-avatar>
+                            <el-avatar shape="square" :size="150" :src="userInfo.userAvatar"></el-avatar>
                         </el-col>
                     </el-row>
                     <el-row>
                         <el-col>
-                            <span class="my-name">0xTiefer_Atem</span><br>
+                            <span class="my-name">{{userInfo.userName}}</span><br>
                             <el-divider style="margin: 0px"></el-divider>
-                            <span class="my-motto">Technology changes the world</span>
+                            <span class="my-motto">{{userInfo.userMotor}}</span>
                             <el-divider></el-divider>
                         </el-col>
                     </el-row>
                     <el-row>
-                        <el-col>
-                            <el-link href="https://github.com/Ich12138" style="margin: 0px" :underline="false">
-                                <el-avatar class="my-icon" size="small" src="https://s.cn.bing.net/th?id=AMMS_538ac5fe8754dd7df7589f49378971dc&w=39&h=39&c=7&rs=1&qlt=90&p=0&cdv=1&pid=RS">
+                        <el-col v-for="(item, index) in userInfo.userRelatedLinksJson" :key="index">
+                            <el-link :href="item.webLink" style="margin: 0px" :underline="false">
+                                <el-avatar class="my-icon" size="small" :src="item.webIcon">
                                 </el-avatar>
                             </el-link>
                         </el-col>
                     </el-row>
                         <h4 style="margin: 0px">个人能力值</h4>
-                        <el-card shadow="hover" class="skill-card" v-for="(item, index) in skillInfoList" :key="index">
+                        <el-card shadow="hover" class="skill-card" v-for="(item, index) in userInfo.userSkillInfoListJson" :key="index">
                             <el-row :gutter="24">
                                 <el-col :span="10">
                                     <div class="skill-text">
@@ -74,6 +74,8 @@
 </template>
 
 <script>
+    import {request} from "../network/request";
+
     export default {
         name: "Home",
         data() {
@@ -90,31 +92,25 @@
                         menuPath: '/personal'
                     }
                 ],
-                skillInfoList: [
-                    {
-                        skillName: '学习能力',
-                        skillPercentage: 95,
-                        skillCondition: ''
-                    },
-                    {
-                        skillName: 'java',
-                        skillPercentage: 85,
-                    },
-                    {
-                        skillName: '算法',
-                        skillPercentage: 50,
-                    },
-                    {
-                        skillName: 'vue',
-                        skillPercentage: 70,
-                    },
-                    {
-                        skillName: '数据结构',
-                        skillPercentage: 80,
-                    }
-                ],
+                userInfo: {},
+
 
             };
+        },
+        created() {
+            request({
+                url: '/blog/selectUserInfo'
+            }).then( res => {
+                let resData = res.data;
+                console.log(resData);
+                if(resData.status === 2000) {
+                    this.userInfo = resData.result.data;
+                }else {
+                    this.$message.error('个人信息加载失败')
+                }
+            }).catch( err => {
+                this.$message.error('个人信息加载失败')
+            })
         },
         methods: {
             handleSelect(key, keyPath) {
