@@ -76,9 +76,8 @@
               if(resData.status === 2000) {
                   this.blogList = resData.result.data;
                   this.total = this.blogList.length
-                  this.$message.success("文章查询成功")
               }else {
-                  this.$message.success("文章查询失败")
+                  this.$message.error("文章查询失败")
               }
           })
       },
@@ -105,9 +104,8 @@
                   if(resData.status === 2000) {
                       this.blogList = resData.result.data;
                       this.total = this.blogList.length
-                      this.$message.success("文章查询成功")
                   }else {
-                      this.$message.success("文章查询失败")
+                      this.$message.error("文章查询失败")
                   }
               })
           },
