@@ -1,7 +1,7 @@
 <template>
     <el-card class="article-list-card" shadow="never">
         <el-row :gutter="24">
-            <el-col :span="8" v-for="(item, index) in blogList" :key="index">
+            <el-col v-if="blogList.length !== 0" :span="8" v-for="(item, index) in blogList" :key="index">
                 <el-card  :body-style="{ padding: '0px' }"
                           class="article-card"
                           shadow="hover">
@@ -33,6 +33,7 @@
                     </el-row>
                 </el-card>
             </el-col>
+            <el-col v-else><div>暂无数据</div></el-col>
         </el-row>
         <el-pagination
                 background
@@ -67,7 +68,7 @@
       },
       activated() {
           request({
-              url: '/blog/selectAll',
+              url: '/blog/selectAllByLimit?offset=0&limit=6',
               method: 'get'
           }).then( res => {
               let resData = res.data;
@@ -90,6 +91,17 @@
           },
           currentChange(pageIndex) {
               console.log(pageIndex);
+              let offset = (pageIndex-1) * 6;
+              request({
+                  url: '/blog/selectAllByLimit?offset='+offset+'&limit=6',
+                  method: 'get'
+              }).then( res => {
+                  let resData = res.data;
+                  console.log(resData);
+                  if(resData.status === 2000) {
+                      this.blogList = resData.result.data;
+                  }
+              })
           },
       }
   }
