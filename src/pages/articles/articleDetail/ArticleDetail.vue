@@ -55,7 +55,7 @@
                 let id = this.$route.query.id;
                 console.log(id);
                 request({
-                    url: '/blog/selectOne?id=' + id
+                    url: '/blog/selectOne?id=' + id + '&status=1'
                 }).then(res => {
                     let resData = res.data;
                     console.log(resData);
