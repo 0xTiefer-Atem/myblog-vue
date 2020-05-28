@@ -14,7 +14,7 @@
                                         {{item.blogTitle}}
                                     </div>
                                     <div class="article-cover-text">
-                                        分类: {{item.blogType}}
+                                        概要: {{item.blogOverview}}
                                     </div>
                                     <el-divider></el-divider>
                                     <el-row :grunt="24">
@@ -151,7 +151,4 @@
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
     }
-
-
-
 </style>
