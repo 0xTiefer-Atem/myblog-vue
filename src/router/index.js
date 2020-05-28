@@ -5,8 +5,7 @@ const ArticleDetail = () => import('../pages/articles/articleDetail/ArticleDetai
 const Personal = () => import('../pages/person/Personal')
 const Home = () => import('../pages/Home')
 const Editor = () => import('../pages/Editor')
-const WorkInfo = () => import('../pages/person/personalDetail/WorkInfo')
-const StudentInfo = () => import('../pages/person/personalDetail/StudentInfo')
+const PersonalInfo = () => import('../pages/person/personalDetail/PersonalInfo')
 Vue.use(VueRouter)
 
 
@@ -40,13 +39,9 @@ Vue.use(VueRouter)
           component: Editor
         },
         {
-          path: 'work-info',
-          component: WorkInfo
+          path: 'personal-info',
+          component: PersonalInfo
         },
-        {
-          path: 'student-info',
-          component: StudentInfo
-        }
       ]
     }
 ]
