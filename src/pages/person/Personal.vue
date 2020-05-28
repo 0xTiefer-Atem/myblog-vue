@@ -11,16 +11,16 @@
                             <div>
                                 <el-card class="article-info-card" @click.native="personalDetailClick(index)" shadow="never">
                                     <div slot="header" class="article-title">
-                                        自我介绍
+                                        {{info.blogTitle}}
                                     </div>
                                     <div class="article-cover-text">
-                                        {{info.title}}
+                                        {{info.blogType}}
                                     </div>
                                     <el-divider></el-divider>
                                     <el-row :grunt="24">
                                         <el-col :span="12" :offset="12">
                                             <div>
-                                                <el-tag style="width: 70%">{{info.updateTime}}</el-tag>
+                                                <el-tag>{{info.createTime}}</el-tag>
                                             </div>
                                         </el-col>
                                     </el-row>
@@ -35,29 +35,42 @@
 </template>
 
 <script>
+    import {request} from "../../network/request";
+
     export default {
         name: "Personal",
         data() {
             return {
-                personalInfoList: [
-                    {
-                        title: "工作经历",
-                        updateTime: "2020-08-09"
-                    },
-                    {
-                        title: "学生经历",
-                        updateTime: "2020-06-09"
-                    },
-                ]
+                personalInfoList: []
             }
+        },
+        activated() {
+            request({
+                url: '/blog/selectSpecialArticle',
+                method: 'get'
+            }).then( res => {
+                let resData = res.data;
+                console.log(resData);
+                if(resData.status === 2000) {
+                    this.personalInfoList = resData.result.data;
+                }else {
+                    this.$message.error("文章查询失败")
+                }
+            })
         },
         methods: {
             personalDetailClick(index) {
+                let query = {}
                 if(index%2 === 0) {
-                    this.$router.push("/my-blog/work-info");
+                    query.id = '002'
                 }else {
-                    this.$router.push("/my-blog/student-info");
+                    query.id = '003'
                 }
+
+                this.$router.push({
+                    path: "/my-blog/personal-info",
+                    query
+                });
             }
         }
     }
