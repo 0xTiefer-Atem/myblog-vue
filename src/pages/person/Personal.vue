@@ -46,7 +46,7 @@
         },
         activated() {
             request({
-                url: '/blog/selectSpecialArticle',
+                url: '/blog/selectSpecialBlog',
                 method: 'get'
             }).then( res => {
                 let resData = res.data;
