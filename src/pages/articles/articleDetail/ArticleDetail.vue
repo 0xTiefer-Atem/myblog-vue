@@ -7,6 +7,9 @@
       <el-page-header @back="goBack">
       </el-page-header>
       {{ blogDetail.blogTitle }}
+      <el-divider content-position="right">
+        <el-button type="text" icon="el-icon-download" @click="downLoadMdFile">下载md文件</el-button>
+      </el-divider>
     </div>
 
     <mavon-editor
@@ -57,7 +60,7 @@ export default {
   },
   methods: {
     /*日期处理*/
-    dateFormat(date){
+    dateFormat(date) {
       return moment(date).format("YYYY-MM-DD HH:mm")
     },
 
@@ -77,6 +80,11 @@ export default {
       })
     },
 
+    //下载md文件
+    downLoadMdFile() {
+      // window.location.href="http://localhost:9192/api/blog/download/md?blogId=" + this.blogDetail.blogId;
+      window.location.href="http://47.107.64.157:9192/api/blog/download/md?blogId=" + this.blogDetail.blogId;
+    },
 
     //返回上一级页面
     goBack() {
