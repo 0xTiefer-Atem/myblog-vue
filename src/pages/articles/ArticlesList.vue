@@ -48,7 +48,7 @@
 </template>
 
 <script>
-  import {request} from "../../network/request";
+  import {request} from "@/network/request";
 
   export default {
       name: "ArticlesList",
@@ -68,13 +68,13 @@
       },
       activated() {
           request({
-              url: '/blog/selectAllByLimit?offset=0&limit=6',
+              url: '/blog/list?pageNum=0&pageSize=10',
               method: 'get'
           }).then( res => {
               let resData = res.data;
               console.log(resData);
-              if(resData.status === 2000) {
-                  this.blogList = resData.result.data;
+              if(resData.status === 200) {
+                  this.blogList = resData.result.data.list;
                   this.total = this.blogList.length
               }else {
                   this.$message.error("文章查询失败")
