@@ -42,14 +42,21 @@
             </el-col>
           </el-row>
           <el-row>
+            <h4>相关网址</h4>
             <el-col>
-              <el-link v-for="(item, index) in userInfo.userRelatedLinks" :key="index" target="_blank"
-                       :href="item.webLink" style="margin: 0px" :underline="false">
-                <el-avatar class="my-icon" size="small" :src="item.webIcon">
-                </el-avatar>
+
+              <el-link v-for="(item, index) in userInfo.userRelatedLinks"
+                       :key="index" target="_blank"
+                       :href="item.webLink"
+                       type="primary"
+                       :underline="false">
+                <div style="margin-right: 10px">
+                  {{item.webName}}
+                </div>
               </el-link>
             </el-col>
           </el-row>
+          <el-divider></el-divider>
           <h4 style="margin: 10px 0px 0px;">个人能力值</h4>
           <el-card shadow="hover" class="skill-card" v-for="(item, index) in userInfo.userSkillInfoList"
                    :key="index">
