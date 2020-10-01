@@ -16,12 +16,12 @@
             </el-menu-item>
           </el-menu>
         </el-col>
-        <!--        <el-col :span="5">-->
-        <!--          <el-input :value="searchWord" class="home-button" placeholder="搜索文章内容"></el-input>-->
-        <!--        </el-col>-->
-        <!--        <el-col :span="1">-->
-        <!--          <el-button class="home-button" icon="el-icon-search" circle></el-button>-->
-        <!--        </el-col>-->
+<!--        <el-col :span="5">-->
+<!--          <el-input :value="searchWord" class="home-button" placeholder="搜索文章内容"></el-input>-->
+<!--        </el-col>-->
+<!--        <el-col :span="1">-->
+<!--          <el-button class="home-button" icon="el-icon-search" circle></el-button>-->
+<!--        </el-col>-->
       </el-row>
     </el-header>
 
@@ -107,11 +107,6 @@ export default {
         this.userInfo = resData.result.data;
         this.userInfo.userRelatedLinks = JSON.parse(this.userInfo.userRelatedLinks)
         this.userInfo.userSkillInfoList = JSON.parse(this.userInfo.userSkillInfoList)
-        // this.userInfo.userAvatar = userInfoData.userAvatar
-        // this.userInfo.userAvatar = userInfoData.userAvatar
-        // this.userInfo.userAvatar = userInfoData.userAvatar
-        // this.userInfo.userAvatar = userInfoData.userAvatar
-        // this.userInfo.userAvatar = userInfoData.userAvatar
       } else {
         this.$message.error('个人信息加载失败')
       }

@@ -2,9 +2,9 @@
   <el-card class="work-card" shadow="never">
     <el-page-header @back="goBack" :content="pageHeader">
     </el-page-header>
-<!--    <div class="ql-snow">-->
-<!--      <div class="ql-editor" v-html="workDetail.blogContent" v-hljs></div>-->
-<!--    </div>-->
+    <!--    <div class="ql-snow">-->
+    <!--      <div class="ql-editor" v-html="workDetail.blogContent" v-hljs></div>-->
+    <!--    </div>-->
     <mavon-editor
         :subfield="false"
         :defaultOpen="'preview'"
@@ -39,7 +39,7 @@ export default {
     getBlogDetail() {
       let id = this.$route.query.id;
       if (id === '002') {
-        this.pageHeader = '项目经历'
+        this.pageHeader = '工作经历'
       } else {
         this.pageHeader = '教育经历'
       }

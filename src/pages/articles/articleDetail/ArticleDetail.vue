@@ -83,7 +83,7 @@ export default {
     //下载md文件
     downLoadMdFile() {
       // window.location.href="http://localhost:9192/api/blog/download/md?blogId=" + this.blogDetail.blogId;
-      window.location.href="http://47.107.64.157:9192/api/blog/download/md?blogId=" + this.blogDetail.blogId;
+      window.location.href = "http://47.107.64.157:9192/api/blog/download/md?blogId=" + this.blogDetail.blogId;
     },
 
     //返回上一级页面
