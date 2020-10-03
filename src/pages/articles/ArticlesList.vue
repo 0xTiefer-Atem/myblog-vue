@@ -5,11 +5,11 @@
         <el-card :body-style="{ padding: '0px' }"
                  class="article-card"
                  shadow="hover">
-          <img src="https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg" class="image">
+          <img :src="item.blogCoverUrl" class="image">
           <el-row>
             <el-col>
               <div>
-                <el-card class="article-info-card" @click.native="articleDetailClick(item.blogId)" shadow="never">
+                <el-card class="article-info-card" @click.native="articleDetailClick(item.blogNo)" shadow="never">
                   <div slot="header" class="article-title">
                     {{ item.blogTitle }}
                   </div>
@@ -19,7 +19,7 @@
                   <el-divider></el-divider>
                   <el-row :grunt="24">
                     <el-col :span="12">
-                      <el-tag v-for="(o, index) in item.blogTagListJson" :key="index" style="margin: 5px; float: left">
+                      <el-tag v-for="(o, index) in item.blogTagList" :key="index" style="margin: 5px; float: left">
                         {{ o.name }}
                       </el-tag>
                     </el-col>
@@ -74,10 +74,10 @@ export default {
     this.currentPageChange(1)
   },
   methods: {
-    articleDetailClick(id) {
-      console.log(id)
+    articleDetailClick(blogNo) {
+      console.log(blogNo)
       let query = {
-        id
+        blogNo
       }
       this.$router.push({
         path: "/my-blog/article-detail",
@@ -85,7 +85,6 @@ export default {
       });
     },
     currentPageChange(pageIndex) {
-      console.log(pageIndex);
       request({
         url: '/blog/list?pageNum=' + pageIndex + '&pageSize=' + this.pageSize,
         method: 'get'
@@ -96,12 +95,21 @@ export default {
           let pageData = resData.result.data;
           this.pageIndex = pageData.pageNum;
           this.blogList = resData.result.data.list;
+          this.optBlogTagList()
           this.total = pageData.size;
+          console.log(this.blogList)
         } else {
           this.$message.error("文章查询失败")
         }
       })
     },
+
+    //数据处理
+    optBlogTagList() {
+      for (let i = 0; i < this.blogList.length; i++) {
+        this.blogList[i].blogTagList = JSON.parse(this.blogList[i].blogTagList)
+      }
+    }
   }
 }
 </script>
