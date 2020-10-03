@@ -68,9 +68,9 @@ export default {
     personalDetailClick(index) {
       let query = {}
       if (index % 2 === 0) {
-        query.id = '002'
+        query.blogNo = '002'
       } else {
-        query.id = '003'
+        query.blogNo = '003'
       }
 
       this.$router.push({
