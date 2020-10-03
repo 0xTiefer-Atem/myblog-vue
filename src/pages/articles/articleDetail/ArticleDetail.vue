@@ -66,10 +66,10 @@ export default {
 
     //获取具体博客内容
     getBlogDetail() {
-      let id = this.$route.query.id;
-      console.log(id);
+      let blogNo = this.$route.query.blogNo;
+      console.log(blogNo);
       request({
-        url: '/blog/query/one?blogId=' + id
+        url: '/blog/query/one?blogNo=' + blogNo
       }).then(res => {
         let resData = res.data;
         if (resData.status === 200) {
@@ -82,8 +82,7 @@ export default {
 
     //下载md文件
     downLoadMdFile() {
-      // window.location.href="http://localhost:9192/api/blog/download/md?blogId=" + this.blogDetail.blogId;
-      window.location.href = "http://47.107.64.157:9192/api/blog/download/md?blogId=" + this.blogDetail.blogId;
+      window.location.href = "http://47.107.64.157:9192/api/blog/download/md?blogNo=" + this.blogDetail.blogNo;
     },
 
     //返回上一级页面
