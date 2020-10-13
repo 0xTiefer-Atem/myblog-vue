@@ -117,6 +117,7 @@ export default {
 <style scoped>
 .image {
   width: 100%;
+  height: 297px;
   display: block;
 }
 
