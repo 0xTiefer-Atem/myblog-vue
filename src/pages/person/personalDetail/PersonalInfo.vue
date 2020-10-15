@@ -63,9 +63,4 @@ export default {
 .work-card {
   border-radius: 30px;
 }
-
-.work-card-header {
-  font-weight: bold;
-  text-align: left;
-}
 </style>
