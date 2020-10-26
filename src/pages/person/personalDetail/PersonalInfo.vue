@@ -40,12 +40,12 @@ export default {
       } else {
         this.pageHeader = '教育经历'
       }
-      console.log(blogNo);
+      // console.log(blogNo);
       request({
         url: 'blog/query/one?blogNo=' + blogNo
       }).then(res => {
         let resData = res.data;
-        console.log(resData);
+        // console.log(resData);
         if (resData.status === 200) {
           this.personalDetail = resData.result.data;
         }

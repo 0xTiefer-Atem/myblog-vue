@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     articleDetailClick(blogNo) {
-      console.log(blogNo)
+      // console.log(blogNo)
       let query = {
         blogNo
       }
@@ -90,14 +90,14 @@ export default {
         method: 'get'
       }).then(res => {
         let resData = res.data;
-        console.log(resData);
+        // console.log(resData);
         if (resData.status === 200) {
           let pageData = resData.result.data;
           this.pageIndex = pageData.pageNum;
           this.blogList = resData.result.data.list;
           this.optBlogTagList()
           this.total = pageData.size;
-          console.log(this.blogList)
+          // console.log(this.blogList)
         } else {
           this.$message.error("文章查询失败")
         }
