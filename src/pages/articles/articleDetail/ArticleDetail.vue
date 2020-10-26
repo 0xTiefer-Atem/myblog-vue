@@ -67,7 +67,7 @@ export default {
     //获取具体博客内容
     getBlogDetail() {
       let blogNo = this.$route.query.blogNo;
-      console.log(blogNo);
+      // console.log(blogNo);
       request({
         url: '/blog/query/one?blogNo=' + blogNo
       }).then(res => {
@@ -75,7 +75,7 @@ export default {
         if (resData.status === 200) {
           this.blogDetail = resData.result.data;
           this.blogDetail.blogTagList = JSON.parse(this.blogDetail.blogTagList)
-          console.log(this.blogDetail);
+          // console.log(this.blogDetail);
         }
       })
     },
