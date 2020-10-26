@@ -16,12 +16,12 @@
             </el-menu-item>
           </el-menu>
         </el-col>
-<!--        <el-col :span="5">-->
-<!--          <el-input :value="searchWord" class="home-button" placeholder="搜索文章内容"></el-input>-->
-<!--        </el-col>-->
-<!--        <el-col :span="1">-->
-<!--          <el-button class="home-button" icon="el-icon-search" circle></el-button>-->
-<!--        </el-col>-->
+        <!--        <el-col :span="5">-->
+        <!--          <el-input :value="searchWord" class="home-button" placeholder="搜索文章内容"></el-input>-->
+        <!--        </el-col>-->
+        <!--        <el-col :span="1">-->
+        <!--          <el-button class="home-button" icon="el-icon-search" circle></el-button>-->
+        <!--        </el-col>-->
       </el-row>
     </el-header>
 
@@ -51,7 +51,7 @@
                        type="primary"
                        :underline="false">
                 <div style="margin-right: 10px">
-                  {{item.webName}}
+                  {{ item.webName }}
                 </div>
               </el-link>
             </el-col>
@@ -110,7 +110,7 @@ export default {
     }).then(res => {
       let resData = res.data;
       if (resData.status === 200) {
-        console.log(resData.result.data)
+        // console.log(resData.result.data)
         this.userInfo = resData.result.data;
         this.userInfo.userRelatedLinks = JSON.parse(this.userInfo.userRelatedLinks)
         this.userInfo.userSkillInfoList = JSON.parse(this.userInfo.userSkillInfoList)
@@ -123,7 +123,7 @@ export default {
   },
   methods: {
     handleSelect(key, keyPath) {
-      console.log(key, keyPath);
+      // console.log(key, keyPath);
       this.activePath = key
     }
   }
