@@ -25,7 +25,7 @@
                     </el-col>
                     <el-col :span="12">
                       <div>
-                        <el-tag style="width: 70%">2020-8-7</el-tag>
+                        <el-tag style="width: 70%">{{ dateFormat(item.createTime) }}</el-tag>
                       </div>
                     </el-col>
                   </el-row>
@@ -53,6 +53,7 @@
 
 <script>
 import {request} from "@/network/request";
+import moment from "_moment@2.29.0@moment";
 
 export default {
   name: "ArticlesList",
@@ -74,6 +75,10 @@ export default {
     this.currentPageChange(1)
   },
   methods: {
+    /*日期处理*/
+    dateFormat(date) {
+      return moment(date).format("YYYY-MM-DD HH:mm")
+    },
     articleDetailClick(blogNo) {
       // console.log(blogNo)
       let query = {
@@ -97,7 +102,7 @@ export default {
           this.blogList = resData.result.data.list;
           this.optBlogTagList()
           this.total = pageData.size;
-          // console.log(this.blogList)
+          console.log(this.blogList)
         } else {
           this.$message.error("文章查询失败")
         }
