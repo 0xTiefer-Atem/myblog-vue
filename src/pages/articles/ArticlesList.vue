@@ -46,6 +46,7 @@
         @current-change="currentPageChange"
         @prev-click="currentPageChange"
         @next-click="currentPageChange"
+        :page-size="pageSize"
         :total="total">
     </el-pagination>
   </el-card>
@@ -95,14 +96,14 @@ export default {
         method: 'get'
       }).then(res => {
         let resData = res.data;
-        // console.log(resData);
+        console.log(resData);
         if (resData.status === 200) {
           let pageData = resData.result.data;
           this.pageIndex = pageData.pageNum;
           this.blogList = resData.result.data.list;
           this.optBlogTagList()
-          this.total = pageData.size;
-          console.log(this.blogList)
+          this.total = pageData.total;
+          // console.log(this.blogList)
         } else {
           this.$message.error("文章查询失败")
         }
