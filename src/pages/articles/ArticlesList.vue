@@ -1,15 +1,5 @@
 <template>
   <el-card class="article-list-card" shadow="never">
-    <div slot="header" class="article-title">
-      <el-row>
-        <el-col :span="8" :offset="8">
-          <el-input placeholder="请想要查询文章" v-model="queryKey" class="input-with-select">
-            <el-button @click="queryByKey(pageIndex)" slot="append" icon="el-icon-search"></el-button>
-          </el-input>
-        </el-col>
-      </el-row>
-
-    </div>
     <el-row :gutter="24">
       <el-col v-if="blogList.length !== 0" :span="8" v-for="(item, index) in blogList" :key="index">
         <el-card :body-style="{ padding: '0px' }"
@@ -132,26 +122,26 @@ export default {
     },
 
     //根据关键字查询文章
-    queryByKey(pageIndex) {
-      let queryKey = this.queryKey
-      request({
-        url: '/blog/queryByKey?pageNum=' + pageIndex + '&pageSize=' + this.pageSize + '&queryKey=' + queryKey,
-        method: 'get'
-      }).then(res => {
-        let resData = res.data;
-        console.log(resData);
-        if (resData.status === 200) {
-          let pageData = resData.result.data;
-          this.pageIndex = pageData.pageNum;
-          this.blogList = resData.result.data.list;
-          this.optBlogTagList()
-          this.total = pageData.total;
-          // console.log(this.blogList)
-        } else {
-          this.$message.error("文章查询失败")
-        }
-      })
-    }
+    // queryByKey(pageIndex) {
+    //   let queryKey = this.queryKey
+    //   request({
+    //     url: '/blog/query/key?pageNum=' + pageIndex + '&pageSize=' + this.pageSize + '&queryKey=' + queryKey,
+    //     method: 'get'
+    //   }).then(res => {
+    //     let resData = res.data;
+    //     console.log(resData);
+    //     if (resData.status === 200) {
+    //       let pageData = resData.result.data;
+    //       this.pageIndex = pageData.pageNum;
+    //       this.blogList = resData.result.data.list;
+    //       this.optBlogTagList()
+    //       this.total = pageData.total;
+    //       // console.log(this.blogList)
+    //     } else {
+    //       this.$message.error("文章查询失败")
+    //     }
+    //   })
+    // }
   }
 }
 </script>
