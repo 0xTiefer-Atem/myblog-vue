@@ -2,7 +2,7 @@
   <el-container style="height: 100%;">
     <el-header>
       <el-row :gutter="20">
-        <el-col :span="8" :offset="6">
+        <el-col :span="4" :offset="6">
           <el-menu router
                    :default-active="activePath"
                    class="el-menu-demo"
@@ -16,12 +16,14 @@
             </el-menu-item>
           </el-menu>
         </el-col>
-        <!--        <el-col :span="5">-->
-        <!--          <el-input :value="searchWord" class="home-button" placeholder="搜索文章内容"></el-input>-->
-        <!--        </el-col>-->
-        <!--        <el-col :span="1">-->
-        <!--          <el-button class="home-button" icon="el-icon-search" circle></el-button>-->
-        <!--        </el-col>-->
+        <el-col :span="8">
+          <el-input style="margin-top: 20px" placeholder="请输入内容" v-model="searchKey" class="input-with-select">
+            <el-select style="width: 150px" v-model="type" slot="prepend" placeholder="请选择文章类型">
+              <el-option v-for="item in typeList" :label="item" :value="item"></el-option>
+            </el-select>
+            <el-button slot="append" @click="searchBlog" icon="el-icon-search"></el-button>
+          </el-input>
+        </el-col>
       </el-row>
     </el-header>
 
@@ -102,6 +104,9 @@ export default {
         }
       ],
       userInfo: {},
+      searchKey: '',
+      type: '',
+      typeList: ['java', '机器学习', 'test'],
     };
   },
   created() {
@@ -111,7 +116,7 @@ export default {
       let resData = res.data;
       if (resData.status === 200) {
         // console.log(resData.result.data)
-        this.userInfo = resData.result.data;
+        this.userInfo = resData.result.data
         this.userInfo.userRelatedLinks = JSON.parse(this.userInfo.userRelatedLinks)
         this.userInfo.userSkillInfoList = JSON.parse(this.userInfo.userSkillInfoList)
       } else {
@@ -120,11 +125,24 @@ export default {
     }).catch(err => {
       this.$message.error('个人信息加载失败')
     })
+
+    request({
+      url: '/blog/query/types'
+    }).then(res => {
+      let resData = res.data;
+      if (resData.status === 200) {
+        this.typeList = resData.result.data
+      }
+    })
   },
   methods: {
     handleSelect(key, keyPath) {
       // console.log(key, keyPath);
       this.activePath = key
+    },
+
+    searchBlog() {
+      console.log(this.type, this.searchKey)
     }
   }
 }
